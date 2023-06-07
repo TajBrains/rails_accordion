@@ -5,7 +5,7 @@ rails_accordion is a Ruby gem that provides an easy-to-use accordion component f
 ## Installation
 
 ```rb
-gem 'rails_accordion', '~> 0.2.0.pre.beta'
+gem 'rails_accordion'
 ```
 
 ```shell
