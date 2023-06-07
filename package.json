@@ -1,0 +1,62 @@
+{
+  "name": "rails_accordion",
+  "author": "Ahmadshoh Nasrullozoda <tajbrains@gmail.com>",
+  "scripts": {
+    "js:visualize": "yarn prod:build:js -- --metafile=js_bundle_metadata.json && esbuild-visualizer --metadata=js_bundle_metadata.json --filename=js_bundle_stats.html",
+    "build": "yarn build:js && yarn build:css",
+    "build:js": "esbuild app/javascript/*.js --bundle --sourcemap --outdir=app/assets/builds",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/rails_accordion.css -o ./app/assets/builds/rails_accordion.css --postcss",
+    "prod:build": "yarn prod:build:js && yarn prod:build:css",
+    "prod:build:js": "esbuild app/javascript/*.js --bundle --sourcemap --minify --outdir=public/assets",
+    "prod:build:css": "tailwindcss -i ./app/assets/stylesheets/rails_accordion.css -o ./public/assets/rails_accordion.css --postcss"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@hotwired/stimulus": "^3.0.1",
+    "@hotwired/turbo-rails": "^7.3.0",
+    "@rails/ujs": "^6.1.0",
+    "autoprefixer": "^10.4.2",
+    "core-js": "^3.21.0",
+    "css-loader": "^6.7.0",
+    "easymde": "^2.18.0",
+    "el-transition": "^0.0.7",
+    "esbuild": "^0.14.25",
+    "eslint-config-airbnb": "^19.0.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+    "js-cookie": "^3.0.1",
+    "lodash": "^4.17.21",
+    "luxon": "^1.28.1",
+    "mapkick": "^0.2.5",
+    "mousetrap": "^1.6.5",
+    "postcss": "^8.4.6",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-import": "^15.0.0",
+    "postcss-loader": "^7.3.0",
+    "postcss-nested": "^6.0.1",
+    "postcss-nested-ancestors": "^3.0.0",
+    "postcss-preset-env": "^8.3.0",
+    "regenerator-runtime": "^0.13.9",
+    "stimulus-use": "^0.50.0-2",
+    "tailwindcss": "^3.0.18",
+    "tippy.js": "^6.3.0",
+    "urijs": "^1.19.11"
+  },
+  "devDependencies": {
+    "@prettier/plugin-ruby": "^2.0.0",
+    "babel-eslint": "^10.1.0",
+    "esbuild-visualizer": "^0.3.1",
+    "eslint": "^8.39.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.0",
+    "prettier": "^2.5.1",
+    "prettier-plugin-erb": "^0.4.0"
+  },
+  "browserslist": [
+    "last 3 and_chr versions",
+    "last 3 chrome versions",
+    "last 3 opera versions",
+    "last 3 ios_saf versions",
+    "last 3 safari versions"
+  ]
+}

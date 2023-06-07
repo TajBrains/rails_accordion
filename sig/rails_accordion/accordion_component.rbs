@@ -1,0 +1,7 @@
+module RailsAccordion
+  class AccordionComponent
+    @args: Hash[String|Symbol, untyped]
+
+    def call: -> void
+  end
+end

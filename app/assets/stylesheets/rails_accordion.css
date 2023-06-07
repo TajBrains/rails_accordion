@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.accordion_content {
+    @apply h-0 overflow-hidden w-full transition-all ease-in-out;
+}
+
+.accordion_toggle {
+    @apply cursor-pointer;
+}
+
+.accordion_content-container {
+    @apply h-max;
+}

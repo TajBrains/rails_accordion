@@ -1,0 +1,19 @@
+module RailsAccordion
+  class ItemComponent
+    @args: Hash[String|Symbol, untyped]
+
+    def call: -> void
+
+    private
+
+    def body_component: -> String
+
+    def content_styles: -> String
+
+    def header_component: -> String
+
+    def set_classes: -> void
+
+    def toggle_styles: -> String
+  end
+end
