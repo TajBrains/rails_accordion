@@ -27,8 +27,11 @@ module RailsAccordion
     end
   end
 
-  def accordion(**args, &block)
-    render AccordionComponent.new(**args), &block
+  def accordion(name, **args)
+    acc = RailsAccordion::Accordion.new(name, **args)
+    yield acc
+    # acc.render
+    render AccordionComponent.new(acc)
   end
 
   def accordion_item(**args, &block)

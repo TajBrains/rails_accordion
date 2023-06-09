@@ -1,6 +1,10 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
+  static values = {
+    defaultState: String,
+  }
+
   connect() {
     this.initAccordion();
 
@@ -10,7 +14,7 @@ export default class extends Controller {
   initDefaultState() {
     const items = this.element.querySelectorAll('.accordion_item');
 
-    switch($(this.element).data('default-state')) {
+    switch(this.defaultStateValue) {
       case 'all_closed':
         this.hideAll(items);
         break;
