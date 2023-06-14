@@ -1,46 +1,39 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  connect() {
-    this.initAccordion();
+  static targets = [ "item" ]
 
-    this.initDefaultState()
+  static values = {
+    multipleOpen: Boolean,
+    defaultState: String
   }
 
-  initDefaultState() {
-    const items = this.element.querySelectorAll('.accordion_item');
-
-    switch($(this.element).data('default-state')) {
+  connect() {
+    // inits default state for accordion
+    switch(this.defaultStateValue) {
       case 'all_closed':
-        this.hideAll(items);
+        this.hideAll(this.itemTargets);
         break;
       case 'all_opened':
-        this.showAll(items);
+        this.showAll(this.itemTargets);
         break;
       case 'first_opened':
-        this.hideAll(items)
-        this.open(items[0].querySelector('.accordion_content'))
+        this.hideAll(this.itemTargets)
+        this.open(this.itemTargets[0].querySelector('.accordion_content'))
     }
   }
 
-  initAccordion() {
-    const items = this.element.querySelectorAll('.accordion_item');
+  toggle(e) {
+    const content = e.currentTarget.parentNode.querySelector('.accordion_content')
 
-    items.forEach((item) => {
-      const toggle = item.querySelector('.accordion_toggle');
-      const content = item.querySelector('.accordion_content')
-
-      toggle.addEventListener('click', (e) => {
-        if (content.classList.contains('accordion_active')) {
-          this.hide(content);
-        } else {
-          if ($(this.element).data('multiple-open') != true) {
-            this.hideAll(items);
-          }
-          this.open(content);
-        }
-      });
-    });
+    if (content.classList.contains('accordion_active')) {
+      this.hide(content);
+    } else {
+      if (!this.multipleOpenValue) {
+        this.hideAll(this.itemTargets);
+      }
+      this.open(content);
+    }
   }
 
   hideAll(items) {
@@ -58,6 +51,12 @@ export default class extends Controller {
 
   open(item) {
     item.classList.add("accordion_active")
-    item.style.height = item.scrollHeight + 'px'
+    item.style.height = item.scrollHeight + 'px';
+
+    item.querySelectorAll('.accordion_content').forEach(function(child) {
+      new ResizeObserver(function() {
+        item.style.height = item.scrollHeight + 'px';
+      }).observe(child);
+    });
   }
 }

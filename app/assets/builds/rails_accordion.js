@@ -1,4 +1,11 @@
 (() => {
+  var __defProp = Object.defineProperty;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __publicField = (obj, key, value) => {
+    __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+    return value;
+  };
+
   // node_modules/mapkick/dist/mapkick.bundle.js
   (function(global2, factory) {
     typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, global2.Mapkick = factory());
@@ -368,7 +375,7 @@
             return r2.path = "/v4/" + r2.authority + ".json", r2.params.push("secure"), this._makeAPIURL(r2, this._customAccessToken || e2);
           }, G.prototype.normalizeSpriteURL = function(t2, e2, r2, n2) {
             var i2 = Y(t2);
-            return Z(t2) ? (i2.path = "/styles/v1" + i2.path + "/sprite" + e2 + r2, this._makeAPIURL(i2, this._customAccessToken || n2)) : (i2.path += "" + e2 + r2, $2(i2));
+            return Z(t2) ? (i2.path = "/styles/v1" + i2.path + "/sprite" + e2 + r2, this._makeAPIURL(i2, this._customAccessToken || n2)) : (i2.path += "" + e2 + r2, $(i2));
           }, G.prototype.normalizeTileURL = function(t2, e2) {
             if (this._isSkuTokenExpired() && this._createSkuToken(), t2 && !Z(t2)) {
               return t2;
@@ -409,7 +416,7 @@
               i2 >= 0 && t2.params.splice(i2, 1);
             }
             if ("/" !== n2.path && (t2.path = "" + n2.path + t2.path), !R.REQUIRE_ACCESS_TOKEN) {
-              return $2(t2);
+              return $(t2);
             }
             if (!(e2 = e2 || R.ACCESS_TOKEN)) {
               throw new Error("An API access token is required to use Mapbox GL. " + r2);
@@ -419,7 +426,7 @@
             }
             return t2.params = t2.params.filter(function(t3) {
               return -1 === t3.indexOf("access_token");
-            }), t2.params.push("access_token=" + e2), $2(t2);
+            }), t2.params.push("access_token=" + e2), $(t2);
           };
           var X = /^((https?:)?\/\/)?([^\/]+\.)?mapbox\.c(n|om)(\/|\?|$)/i;
           function J(t2) {
@@ -433,7 +440,7 @@
             }
             return { protocol: e2[1], authority: e2[2], path: e2[3] || "/", params: e2[4] ? e2[4].split("&") : [] };
           }
-          function $2(t2) {
+          function $(t2) {
             var e2 = t2.params.length ? "?" + t2.params.join("&") : "";
             return t2.protocol + "://" + t2.authority + t2.path + e2;
           }
@@ -488,7 +495,7 @@
             if (R.EVENTS_URL) {
               var a2 = Y(R.EVENTS_URL);
               a2.params.push("access_token=" + (n2 || R.ACCESS_TOKEN || ""));
-              var o2 = { event: this.type, created: new Date(t2).toISOString(), sdkIdentifier: "mapbox-gl-js", sdkVersion: "1.13.3", skuId: K, userId: this.anonId }, s2 = e2 ? h(o2, e2) : o2, u2 = { url: $2(a2), headers: { "Content-Type": "text/plain" }, body: JSON.stringify([s2]) };
+              var o2 = { event: this.type, created: new Date(t2).toISOString(), sdkIdentifier: "mapbox-gl-js", sdkVersion: "1.13.3", skuId: K, userId: this.anonId }, s2 = e2 ? h(o2, e2) : o2, u2 = { url: $(a2), headers: { "Content-Type": "text/plain" }, body: JSON.stringify([s2]) };
               this.pendingRequest = wt(u2, function(t3) {
                 i2.pendingRequest = null, r2(t3), i2.saveEventData(), i2.processRequests(n2);
               });
@@ -8832,8 +8839,8 @@
                       var Y3 = n4.horizontal[H3];
                       if (!z4) {
                         R4 = ha(Y3.text);
-                        var $4 = s5.layout.get("text-rotate").evaluate(b4, {}, S4);
-                        z4 = new Wu(u5, e4, l4, p5, c6, Y3, h5, f5, y4, $4);
+                        var $3 = s5.layout.get("text-rotate").evaluate(b4, {}, S4);
+                        z4 = new Wu(u5, e4, l4, p5, c6, Y3, h5, f5, y4, $3);
                       }
                       var W3 = 1 === Y3.positionedLines.length;
                       if (V4 += sl(t4, e4, Y3, a5, s5, y4, b4, d4, M4, n4.vertical ? wu.horizontal : wu.horizontalOnly, W3 ? Object.keys(n4.horizontal) : [H3], O4, D4, w4, S4), W3) {
@@ -8876,8 +8883,8 @@
                   }
                 } else if ("Point" === e3.type) {
                   for (var J2 = 0, H2 = e3.geometry; J2 < H2.length; J2 += 1) {
-                    for (var Y2 = 0, $3 = H2[J2]; Y2 < $3.length; Y2 += 1) {
-                      var W2 = $3[Y2];
+                    for (var Y2 = 0, $2 = H2[J2]; Y2 < $2.length; Y2 += 1) {
+                      var W2 = $2[Y2];
                       P3([W2], new Fu(W2.x, W2.y, 0));
                     }
                   }
@@ -9453,7 +9460,7 @@
               e2.minX = Math.min(e2.minX, t2[r2]), e2.minY = Math.min(e2.minY, t2[r2 + 1]), e2.maxX = Math.max(e2.maxX, t2[r2]), e2.maxY = Math.max(e2.maxY, t2[r2 + 1]);
             }
           }
-          function $2(e2, t2, r2, i2) {
+          function $(e2, t2, r2, i2) {
             if (t2.geometry) {
               var o2 = t2.geometry.coordinates, n2 = t2.geometry.type, a2 = Math.pow(r2.tolerance / ((1 << r2.maxZoom) * r2.extent), 2), s2 = [], l2 = t2.id;
               if (r2.promoteId ? l2 = t2.properties[r2.promoteId] : r2.generateId && (l2 = i2 || 0), "Point" === n2) {
@@ -9478,7 +9485,7 @@
                 if ("MultiPolygon" !== n2) {
                   if ("GeometryCollection" === n2) {
                     for (u2 = 0; u2 < t2.geometry.geometries.length; u2++) {
-                      $2(e2, { id: l2, geometry: t2.geometry.geometries[u2], properties: t2.properties }, r2, i2);
+                      $(e2, { id: l2, geometry: t2.geometry.geometries[u2], properties: t2.properties }, r2, i2);
                     }
                     return;
                   }
@@ -9735,10 +9742,10 @@
               var r3 = [];
               if ("FeatureCollection" === e3.type) {
                 for (var i3 = 0; i3 < e3.features.length; i3++) {
-                  $2(r3, e3.features[i3], t3, i3);
+                  $(r3, e3.features[i3], t3, i3);
                 }
               } else {
-                $2(r3, "Feature" === e3.type ? e3 : { geometry: e3 }, t3);
+                $(r3, "Feature" === e3.type ? e3 : { geometry: e3 }, t3);
               }
               return r3;
             }(e2, t2);
@@ -11155,7 +11162,7 @@
                 t3 ? e3.enable(e3.STENCIL_TEST) : e3.disable(e3.STENCIL_TEST), this.current = t3, this.dirty = false;
               }
             }, e2;
-          }(j), $2 = function(t2) {
+          }(j), $ = function(t2) {
             function e2() {
               t2.apply(this, arguments);
             }
@@ -11451,7 +11458,7 @@
           };
           Ct.disabled = new Ct(false, 1029, 2305), Ct.backCCW = new Ct(true, 1029, 2305);
           var zt = function(t2) {
-            this.gl = t2, this.extVertexArrayObject = this.gl.getExtension("OES_vertex_array_object"), this.clearColor = new V(this), this.clearDepth = new G(this), this.clearStencil = new W(this), this.colorMask = new X(this), this.depthMask = new H(this), this.stencilMask = new K(this), this.stencilFunc = new Y(this), this.stencilOp = new J(this), this.stencilTest = new Q(this), this.depthRange = new $2(this), this.depthTest = new tt(this), this.depthFunc = new et(this), this.blend = new it(this), this.blendFunc = new ot(this), this.blendColor = new rt(this), this.blendEquation = new at(this), this.cullFace = new nt(this), this.cullFaceSide = new st(this), this.frontFace = new lt(this), this.program = new ct(this), this.activeTexture = new ut(this), this.viewport = new ht(this), this.bindFramebuffer = new pt(this), this.bindRenderbuffer = new dt(this), this.bindTexture = new _t(this), this.bindVertexBuffer = new ft(this), this.bindElementBuffer = new mt(this), this.bindVertexArrayOES = this.extVertexArrayObject && new gt(this), this.pixelStoreUnpack = new vt(this), this.pixelStoreUnpackPremultiplyAlpha = new yt(this), this.pixelStoreUnpackFlipY = new xt(this), this.extTextureFilterAnisotropic = t2.getExtension("EXT_texture_filter_anisotropic") || t2.getExtension("MOZ_EXT_texture_filter_anisotropic") || t2.getExtension("WEBKIT_EXT_texture_filter_anisotropic"), this.extTextureFilterAnisotropic && (this.extTextureFilterAnisotropicMax = t2.getParameter(this.extTextureFilterAnisotropic.MAX_TEXTURE_MAX_ANISOTROPY_EXT)), this.extTextureHalfFloat = t2.getExtension("OES_texture_half_float"), this.extTextureHalfFloat && (t2.getExtension("OES_texture_half_float_linear"), this.extRenderToTextureHalfFloat = t2.getExtension("EXT_color_buffer_half_float")), this.extTimerQuery = t2.getExtension("EXT_disjoint_timer_query"), this.maxTextureSize = t2.getParameter(t2.MAX_TEXTURE_SIZE);
+            this.gl = t2, this.extVertexArrayObject = this.gl.getExtension("OES_vertex_array_object"), this.clearColor = new V(this), this.clearDepth = new G(this), this.clearStencil = new W(this), this.colorMask = new X(this), this.depthMask = new H(this), this.stencilMask = new K(this), this.stencilFunc = new Y(this), this.stencilOp = new J(this), this.stencilTest = new Q(this), this.depthRange = new $(this), this.depthTest = new tt(this), this.depthFunc = new et(this), this.blend = new it(this), this.blendFunc = new ot(this), this.blendColor = new rt(this), this.blendEquation = new at(this), this.cullFace = new nt(this), this.cullFaceSide = new st(this), this.frontFace = new lt(this), this.program = new ct(this), this.activeTexture = new ut(this), this.viewport = new ht(this), this.bindFramebuffer = new pt(this), this.bindRenderbuffer = new dt(this), this.bindTexture = new _t(this), this.bindVertexBuffer = new ft(this), this.bindElementBuffer = new mt(this), this.bindVertexArrayOES = this.extVertexArrayObject && new gt(this), this.pixelStoreUnpack = new vt(this), this.pixelStoreUnpackPremultiplyAlpha = new yt(this), this.pixelStoreUnpackFlipY = new xt(this), this.extTextureFilterAnisotropic = t2.getExtension("EXT_texture_filter_anisotropic") || t2.getExtension("MOZ_EXT_texture_filter_anisotropic") || t2.getExtension("WEBKIT_EXT_texture_filter_anisotropic"), this.extTextureFilterAnisotropic && (this.extTextureFilterAnisotropicMax = t2.getParameter(this.extTextureFilterAnisotropic.MAX_TEXTURE_MAX_ANISOTROPY_EXT)), this.extTextureHalfFloat = t2.getExtension("OES_texture_half_float"), this.extTextureHalfFloat && (t2.getExtension("OES_texture_half_float_linear"), this.extRenderToTextureHalfFloat = t2.getExtension("EXT_color_buffer_half_float")), this.extTimerQuery = t2.getExtension("EXT_disjoint_timer_query"), this.maxTextureSize = t2.getParameter(t2.MAX_TEXTURE_SIZE);
           };
           zt.prototype.setDefault = function() {
             this.unbindVAO(), this.clearColor.setDefault(), this.clearDepth.setDefault(), this.clearStencil.setDefault(), this.colorMask.setDefault(), this.depthMask.setDefault(), this.stencilMask.setDefault(), this.stencilFunc.setDefault(), this.stencilOp.setDefault(), this.stencilTest.setDefault(), this.depthRange.setDefault(), this.depthTest.setDefault(), this.depthFunc.setDefault(), this.blend.setDefault(), this.blendFunc.setDefault(), this.blendColor.setDefault(), this.blendEquation.setDefault(), this.cullFace.setDefault(), this.cullFaceSide.setDefault(), this.frontFace.setDefault(), this.program.setDefault(), this.activeTexture.setDefault(), this.bindFramebuffer.setDefault(), this.pixelStoreUnpack.setDefault(), this.pixelStoreUnpackPremultiplyAlpha.setDefault(), this.pixelStoreUnpackFlipY.setDefault();
@@ -12452,8 +12459,8 @@
                   if (K2 || Y2 ? Y2 ? K2 || (P3 = P3 && T3) : T3 = P3 && T3 : P3 = T3 = P3 && T3, T3 && d3 && d3.box && r2.collisionIndex.insertCollisionBox(d3.box, s2.get("text-ignore-placement"), n2.bucketInstanceId, D3 && D3.box && R2 ? R2 : L2, f2.ID), P3 && M2 && r2.collisionIndex.insertCollisionBox(M2.box, s2.get("icon-ignore-placement"), n2.bucketInstanceId, k2, f2.ID), A3 && (T3 && r2.collisionIndex.insertCollisionCircles(A3.circles, s2.get("text-ignore-placement"), n2.bucketInstanceId, L2, f2.ID), o2)) {
                     var J2 = n2.bucketInstanceId, Q2 = r2.collisionCircleArrays[J2];
                     void 0 === Q2 && (Q2 = r2.collisionCircleArrays[J2] = new me());
-                    for (var $3 = 0; $3 < A3.circles.length; $3 += 4) {
-                      Q2.circles.push(A3.circles[$3 + 0]), Q2.circles.push(A3.circles[$3 + 1]), Q2.circles.push(A3.circles[$3 + 2]), Q2.circles.push(A3.collisionDetected ? 1 : 0);
+                    for (var $2 = 0; $2 < A3.circles.length; $2 += 4) {
+                      Q2.circles.push(A3.circles[$2 + 0]), Q2.circles.push(A3.circles[$2 + 1]), Q2.circles.push(A3.circles[$2 + 2]), Q2.circles.push(A3.collisionDetected ? 1 : 0);
                     }
                   }
                   r2.placements[e3.crossTileID] = new fe(T3 || E2, P3 || I2, S3 || n2.justReloaded), i2[e3.crossTileID] = true;
@@ -13710,15 +13717,15 @@
                   }
                   var V2 = pe(C2, 1, e2.transform.zoom), G2 = Jt(S2.posMatrix, g2, m2, e2.transform, V2), W2 = Qt(S2.posMatrix, g2, m2, e2.transform, V2), X2 = T2 && z2.hasTextData(), H2 = "none" !== o2.layout.get("icon-text-fit") && X2 && z2.hasIconData();
                   v2 && ie(z2, S2.posMatrix, e2, a2, G2, W2, g2, u2);
-                  var K2 = e2.translatePosMatrix(S2.posMatrix, C2, n2, s2), Y2 = v2 || a2 && T2 || H2 ? Ji : G2, J2 = e2.translatePosMatrix(W2, C2, n2, s2, true), Q2 = M2 && 0 !== o2.paint.get(a2 ? "text-halo-width" : "icon-halo-width").constantOr(1), $3 = { program: k2, buffers: D2, uniformValues: M2 ? z2.iconsInText ? Wi(L2.kind, B2, y2, g2, e2, K2, Y2, J2, O2, F2) : Gi(L2.kind, B2, y2, g2, e2, K2, Y2, J2, a2, O2, true) : Vi(L2.kind, B2, y2, g2, e2, K2, Y2, J2, a2, O2), atlasTexture: U2, atlasTextureIcon: Z2, atlasInterpolation: N2, atlasInterpolationIcon: q2, isSDF: M2, hasHalo: Q2 };
+                  var K2 = e2.translatePosMatrix(S2.posMatrix, C2, n2, s2), Y2 = v2 || a2 && T2 || H2 ? Ji : G2, J2 = e2.translatePosMatrix(W2, C2, n2, s2, true), Q2 = M2 && 0 !== o2.paint.get(a2 ? "text-halo-width" : "icon-halo-width").constantOr(1), $2 = { program: k2, buffers: D2, uniformValues: M2 ? z2.iconsInText ? Wi(L2.kind, B2, y2, g2, e2, K2, Y2, J2, O2, F2) : Gi(L2.kind, B2, y2, g2, e2, K2, Y2, J2, a2, O2, true) : Vi(L2.kind, B2, y2, g2, e2, K2, Y2, J2, a2, O2), atlasTexture: U2, atlasTextureIcon: Z2, atlasInterpolation: N2, atlasInterpolationIcon: q2, isSDF: M2, hasHalo: Q2 };
                   if (x2 && z2.canOverlap) {
                     b2 = true;
                     for (var tt2 = 0, et2 = D2.segments.get(); tt2 < et2.length; tt2 += 1) {
                       var it2 = et2[tt2];
-                      E2.push({ segments: new t.SegmentVector([it2]), sortKey: it2.sortKey, state: $3 });
+                      E2.push({ segments: new t.SegmentVector([it2]), sortKey: it2.sortKey, state: $2 });
                     }
                   } else {
-                    E2.push({ segments: D2.segments, sortKey: 0, state: $3 });
+                    E2.push({ segments: D2.segments, sortKey: 0, state: $2 });
                   }
                 }
               }
@@ -19666,39 +19673,28 @@
   // app/javascript/controllers/accordion_controller.js
   var accordion_controller_default = class extends Controller {
     connect() {
-      this.initAccordion();
-      this.initDefaultState();
-    }
-    initDefaultState() {
-      const items = this.element.querySelectorAll(".accordion_item");
-      switch ($(this.element).data("default-state")) {
+      switch (this.defaultStateValue) {
         case "all_closed":
-          this.hideAll(items);
+          this.hideAll(this.itemTargets);
           break;
         case "all_opened":
-          this.showAll(items);
+          this.showAll(this.itemTargets);
           break;
         case "first_opened":
-          this.hideAll(items);
-          this.open(items[0].querySelector(".accordion_content"));
+          this.hideAll(this.itemTargets);
+          this.open(this.itemTargets[0].querySelector(".accordion_content"));
       }
     }
-    initAccordion() {
-      const items = this.element.querySelectorAll(".accordion_item");
-      items.forEach((item) => {
-        const toggle = item.querySelector(".accordion_toggle");
-        const content = item.querySelector(".accordion_content");
-        toggle.addEventListener("click", (e) => {
-          if (content.classList.contains("accordion_active")) {
-            this.hide(content);
-          } else {
-            if ($(this.element).data("multiple-open") != true) {
-              this.hideAll(items);
-            }
-            this.open(content);
-          }
-        });
-      });
+    toggle(e) {
+      const content = e.currentTarget.parentNode.querySelector(".accordion_content");
+      if (content.classList.contains("accordion_active")) {
+        this.hide(content);
+      } else {
+        if (!this.multipleOpenValue) {
+          this.hideAll(this.itemTargets);
+        }
+        this.open(content);
+      }
     }
     hideAll(items) {
       items.forEach((item) => this.hide(item.querySelector(".accordion_content")));
@@ -19713,8 +19709,18 @@
     open(item) {
       item.classList.add("accordion_active");
       item.style.height = item.scrollHeight + "px";
+      item.querySelectorAll(".accordion_content").forEach(function(child) {
+        new ResizeObserver(function() {
+          item.style.height = item.scrollHeight + "px";
+        }).observe(child);
+      });
     }
   };
+  __publicField(accordion_controller_default, "targets", ["item"]);
+  __publicField(accordion_controller_default, "values", {
+    multipleOpen: Boolean,
+    defaultState: String
+  });
 
   // app/javascript/rails_accordion.js
   var application = Application.start();

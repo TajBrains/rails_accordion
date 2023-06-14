@@ -5,13 +5,11 @@ class ItemComponent < ViewComponent::Base
   renders_one :header
 
   def initialize(**args)
-    super
     @args = args.presence || {}
-    set_classes
   end
 
   def call
-    content_tag :div, **@args do
+    content_tag :div, class: [@args.delete(:class), "accordion_item"].compact.join(" "), data: { accordion_target: "item" }, **@args do
       header_component + body_component
     end
   end
@@ -19,7 +17,7 @@ class ItemComponent < ViewComponent::Base
   private
 
   def header_component
-    content_tag :div, header, class: "accordion_toggle"
+    content_tag :div, header, class: "accordion_toggle", data: { action: "click->accordion#toggle" }
   end
 
   def body_component
@@ -30,10 +28,6 @@ class ItemComponent < ViewComponent::Base
     else
       content_tag(:div, nil, class: "hidden")
     end
-  end
-
-  def set_classes
-    @args[:class] = [@args[:class], "accordion_item"].compact.join(" ")
   end
 
   def content_styles
