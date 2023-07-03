@@ -13,6 +13,16 @@ module RailsAccordion
     end
   end
 
+  class Engine < ::Rails::Engine
+    isolate_namespace RailsAccordion
+
+    config.app_middleware.use(
+      Rack::Static,
+      urls: ["/rails_accordion_assets"],
+      root: RailsAccordion::Engine.root.join("public")
+    )
+  end
+
   def self.root
     RailsAccordion::Engine.routes.find_script_name({})
   end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_accordion (0.1.11.pre.beta)
+    rails_accordion (1.0.3)
       stimulus-rails (~> 1.2)
       view_component (~> 2.52)
       zeitwerk (~> 2.6)

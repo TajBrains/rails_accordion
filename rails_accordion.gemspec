@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.metadata["source_code_uri"] = "https://github.com/Tajbrains/rails_accordion"
   spec.metadata["changelog_uri"] = "https://github.com/Tajbrains/rails_accordion/blob/master/CHANGELOG.md"
 
-  spec.files = Dir["{bin,app,lib,vendor}/**/*", "MIT-LICENSE", "Rakefile", "README.md", "rails_accordion.gemspec", "Gemfile", "Gemfile.lock"]
+  spec.files = Dir["{bin,app,lib,public}/**/*", "MIT-LICENSE", "Rakefile", "README.md", "rails_accordion.gemspec", "Gemfile", "Gemfile.lock"]
 
   spec.add_dependency "stimulus-rails", "~> 1.2"
   spec.add_dependency "view_component", "~> 2.52"
