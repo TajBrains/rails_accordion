@@ -1,4 +1,7 @@
-# desc "Explaining what the task does"
-# task :rails_table do
-#   # Task goes here
-# end
+namespace :rails_accordion do
+  desc "Build for release"
+  task :build do
+    `yarn build`
+    `cp -r ./app/assets/builds/* ./public/rails_accordion_assets`
+  end
+end

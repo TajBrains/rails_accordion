@@ -16,64 +16,18 @@ bundle install
 rails generate rails_accordion:install
 ```
 
-Then follow the instructions for your JavaScript setup:
+In `application.html.erb`, add:
 
-- [Importmap](#importmap) (Rails 7 default)
-- [esbuild, rollup.js, or Webpack](#esbuild-rollupjs-or-webpack)
-- [Webpacker](#webpacker) (Rails 6 default)
-- [Sprockets](#sprockets)
-
-### Importmap
-
-In `config/importmap.rb`, add:
-
-```ruby
-pin "rails_accordion", to: "rails_accordion.js"
+```erb
+<%= rails_accordion_assets %>
 ```
 
-And in `app/javascript/application.js`, add:
+In `application_helper.rb`, add:
 
-```js
-import "rails_accordion"
+```rb
+include RailsAccordion::ApplicationHelper
 ```
 
-### esbuild, rollup.js, or Webpack
-
-Run:
-
-```sh
-yarn add rails_accordion rails_accordion.js
-```
-
-And in `app/javascript/application.js`, add:
-
-```js
-import "rails_accordion/rails_accordion.js"
-```
-
-Note: For rollup.js, this requires `format: "iife"` in `rollup.config.js`.
-
-### Webpacker
-
-Run:
-
-```sh
-yarn add rails_accordion rails_accordion.js
-```
-
-And in `app/javascript/packs/application.js`, add:
-
-```js
-import "rails_accordion/rails_accordion.js"
-```
-
-### Sprockets
-
-In `app/assets/javascripts/application.js`, add:
-
-```js
-//= require rails_accordion
-```
 
 ## Usage
 

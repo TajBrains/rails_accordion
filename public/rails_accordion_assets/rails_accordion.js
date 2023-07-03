@@ -1,4 +1,11 @@
 (() => {
+  var __defProp = Object.defineProperty;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __publicField = (obj, key, value) => {
+    __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+    return value;
+  };
+
   // node_modules/mapkick/dist/mapkick.bundle.js
   (function(global2, factory) {
     typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory() : typeof define === "function" && define.amd ? define(factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, global2.Mapkick = factory());
@@ -19666,38 +19673,54 @@
   // app/javascript/controllers/accordion_controller.js
   var accordion_controller_default = class extends Controller {
     connect() {
-      this.initAccordion();
+      switch (this.defaultStateValue) {
+        case "all_closed":
+          this.hideAll(this.itemTargets);
+          break;
+        case "all_opened":
+          this.showAll(this.itemTargets);
+          break;
+        case "first_opened":
+          this.hideAll(this.itemTargets);
+          this.open(this.itemTargets[0].querySelector(".accordion_content"));
+      }
     }
-    initAccordion() {
-      const items = this.element.querySelectorAll(".accordion_item");
-      items.forEach((item) => {
-        const toggle = item.querySelector(".accordion_toggle");
-        toggle.addEventListener("click", (e) => {
-          if (item.classList.contains("active")) {
-            this.hide(item);
-          } else {
-            this.hideAll(items);
-            this.open(item);
-          }
-        });
-      });
+    toggle(e) {
+      const content = e.currentTarget.parentNode.querySelector(".accordion_content");
+      if (content.classList.contains("accordion_active")) {
+        this.hide(content);
+      } else {
+        if (!this.multipleOpenValue) {
+          this.hideAll(this.itemTargets);
+        }
+        this.open(content);
+      }
     }
     hideAll(items) {
-      items.forEach((item) => this.hide(item));
+      items.forEach((item) => this.hide(item.querySelector(".accordion_content")));
+    }
+    showAll(items) {
+      items.forEach((item) => this.open(item.querySelector(".accordion_content")));
     }
     hide(item) {
-      item.classList.remove("active");
-      const content = item.querySelector(".accordion_content");
-      content.style.height = "0px";
+      item.classList.remove("accordion_active");
+      item.style.height = 0;
     }
     open(item) {
-      item.classList.add("active");
-      const content = item.querySelector(".accordion_content");
-      content.style.height = "auto";
-      const contentHeight = content.style.height;
-      content.animate({ height: contentHeight + "px" }, 50);
+      item.classList.add("accordion_active");
+      item.style.height = item.scrollHeight + "px";
+      item.querySelectorAll(".accordion_content").forEach(function(child) {
+        new ResizeObserver(function() {
+          item.style.height = item.scrollHeight + "px";
+        }).observe(child);
+      });
     }
   };
+  __publicField(accordion_controller_default, "targets", ["item"]);
+  __publicField(accordion_controller_default, "values", {
+    multipleOpen: Boolean,
+    defaultState: String
+  });
 
   // app/javascript/rails_accordion.js
   var application = Application.start();

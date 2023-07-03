@@ -7,32 +7,8 @@ loader.ignore("#{__dir__}/generators")
 loader.setup
 
 module RailsAccordion
-
-  class Error < StandardError; end
-
-  class Engine < ::Rails::Engine
-    isolate_namespace RailsAccordion
-
-    initializer "rails_accordion.importmap" do |app|
-      if defined?(Importmap)
-        app.config.assets.precompile << "rails_accordion.js"
-        app.config.assets.precompile << "rails_accordion.css"
-      end
-    end
-  end
-
-  class Railtie < Rails::Railtie
-    ActiveSupport.on_load :action_view do
-      include RailsAccordion
-    end
-  end
-
-  def accordion(**args, &block)
-    render AccordionComponent.new(**args), &block
-  end
-
-  def accordion_item(**args, &block)
-    render ItemComponent.new(**args), &block
+  def self.root
+    RailsAccordion::Engine.routes.find_script_name({})
   end
 end
 
