@@ -1,4 +1,4 @@
-# RailsAccordion
+# RailsAccordion [![Gem Version](https://badge.fury.io/rb/rails_accordion.svg)](https://badge.fury.io/rb/rails_accordion)
 
 RailsAccordion is a Ruby gem that provides an easy-to-use accordion component for Rails web applications. This gem allows developers to create collapsible sections of content that can be expanded or collapsed with a single click. The accordion is a powerful tool to enhance the user experience of your web application by providing a clean and intuitive way to display complex information.
 
